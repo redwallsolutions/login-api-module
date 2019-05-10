@@ -44,6 +44,11 @@ public class ValidateLoginUserCommand extends AbstractCommand{
         
     }
     
+    private void setRetrievedUserToModel(User loadedUser) {
+        LoginUser loginUser = (LoginUser) flowContainer.getModel();
+        loginUser.setUser(loadedUser);
+    }
+    
     private boolean isCredentialsInvalid(User user){
         return user.getEmail() == null || user.getEmail().isEmpty() || user.getPassword() == null || user.getPassword().isEmpty();
     }
@@ -55,10 +60,12 @@ public class ValidateLoginUserCommand extends AbstractCommand{
         User loadedUser = retrieveUserByCredentials(user);
         
         if(loadedUser != null){
-            if(BCrypt.checkpw(loadedUser.getPassword(), user.getPassword())){
+            if(BCrypt.checkpw(user.getPassword(), loadedUser.getPassword())){
                 isValidMatch = true;
             }
         }
+        
+        setRetrievedUserToModel(loadedUser);
         
         return isValidMatch;
          
