@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <build>
         <plugins>
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <executions>
@@ -18,14 +18,15 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>third-parties-api-module/src/main/java</source>
+                                <source>users-api-module/src/main/java</source>
                             </sources>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <version>3.0.0-M3</version>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
@@ -70,6 +71,11 @@
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>   
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

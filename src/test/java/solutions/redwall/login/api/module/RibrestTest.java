@@ -1,3 +1,5 @@
+package solutions.redwall.login.api.module;
+
 import br.com.andrewribeiro.ribrest.Ribrest;
 import br.com.andrewribeiro.ribrest.core.exceptions.RibrestDefaultException;
 import br.com.andrewribeiro.ribrest.logs.RibrestLog;
@@ -24,7 +26,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 public class RibrestTest {
 
     protected final static String BASE_URL = "http://localhost:2019/";
-    protected final static String APP_NAME = "newmaq-financeiro-api/";
+    protected final static String APP_NAME = "login-api-module/";
     protected final static String APP_URL = BASE_URL + APP_NAME;
 
     protected final Client c = ClientBuilder.newClient();
@@ -70,6 +72,12 @@ public class RibrestTest {
     public void getWithHeaders(String path, MultivaluedMap headers) {
         WebTarget wt = buildWebTarget(path);
         response = wt.request(MediaType.APPLICATION_JSON).headers(headers).get();
+        getResponseText();
+    }
+    
+    public void postWithHeaders(String path, Form form, MultivaluedMap headers){
+        WebTarget wt = buildWebTarget(path);
+        response = wt.request(MediaType.APPLICATION_JSON).headers(headers).post(Entity.form(form));
         getResponseText();
     }
 
@@ -163,7 +171,7 @@ public class RibrestTest {
 
     @BeforeClass
     public static void before() {
-        Ribrest.getInstance().debug(true).appBaseUrl(BASE_URL).appName(APP_NAME).persistenceUnitName("newmaq-financeiro-api").init();
+        Ribrest.getInstance().debug(true).appBaseUrl(BASE_URL).appName(APP_NAME).persistenceUnitName("login-api-module").init();
     }
 
 //    @AfterClass
